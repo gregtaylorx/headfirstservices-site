@@ -34,9 +34,16 @@ Domain is already on Cloudflare, so Pages is the path of least resistance.
 
 Either way: no build tooling, no npm install — it's just static files.
 
+## Current deploy status (as of Jul 2026)
+
+- Deployed via direct upload (`npx wrangler pages deploy . --project-name=headfirstservices --commit-dirty=true`), not git-connected. Re-run this command after every content change.
+- Custom domain `headfirstservices.com` is bound directly to this Pages project (Custom Domains tab). It serves `/`, `/visastay/*`, `/packlite/*`, and `/assets/*` natively.
+- The old `hfs-assets` Worker (a stale pre-existing VisaStay marketing page) previously held the `headfirstservices.com` domain and has been detached.
+- A temporary reverse-proxy Worker (`hfs-visastay-proxy`, repo: `nomad-suite/visastay-proxy`) was used before the Pages project owned the root domain, to serve `/visastay/*` etc. alongside the old Worker. It's now retired/deleted — no longer needed since Pages owns the whole domain.
+
 ## After going live
 
 - Submit `https://headfirstservices.com/sitemap.xml` in Google Search Console + Bing Webmaster Tools
-- Once VisaStay is public on Play Store / App Store, replace the "closed testing" / "in review" badges in `/visastay/index.html` with real store links
+- Android is in closed testing — update the Google Play badge in `/visastay/index.html` once it's public
 - If PackLite publishes, convert `/packlite/index.html` from teaser to full product page (mirror `/visastay/` layout)
 - Legal pages (privacy/delete-account) currently stay hosted at gregtaylorx.github.io — that's what's registered with Google Play / App Store. Don't move them without updating both store listings first.
