@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HeadFirst Services — Focused apps for people who travel and work differently</title>
-<meta name="description" content="HeadFirst Services builds small, focused mobile apps — starting with the Digital Nomad Essentials suite (VisaStay, PackLite, and more) for people who live and work on the move.">
+<title>HeadFirst Services — Mobile App Development Studio</title>
+<meta name="description" content="HeadFirst Services is a mobile app development studio building focused Flutter + Supabase apps for people who travel and work differently — VisaStay, PackLite, and ZoneLink.">
 <link rel="canonical" href="https://headfirstservices.com/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2214%22 fill=%22%230d7d8f%22/%3E%3Ctext x=%2232%22 y=%2242%22 font-size=%2228%22 font-family=%22Arial%22 font-weight=%22800%22 fill=%22white%22 text-anchor=%22middle%22%3EHF%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="/assets/css/style.css">
 
 <!-- Open Graph / social -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="HeadFirst Services">
-<meta property="og:description" content="Focused apps for people who travel and work differently — starting with the Digital Nomad Essentials suite.">
+<meta property="og:title" content="HeadFirst Services — Mobile App Development Studio">
+<meta property="og:description" content="A mobile app development studio building focused Flutter + Supabase apps — VisaStay, PackLite, and ZoneLink.">
 <meta property="og:url" content="https://headfirstservices.com/">
 
 <script type="application/ld+json">
@@ -21,6 +21,7 @@
   "@type": "Organization",
   "name": "HeadFirst Services",
   "url": "https://headfirstservices.com/",
+  "description": "Mobile app development studio building Flutter + Supabase apps, including the Digital Nomad Essentials suite (VisaStay, PackLite, ZoneLink).",
   "sameAs": []
 }
 </script>
@@ -44,12 +45,12 @@
 <section class="hero with-bg">
   <div class="container hero-inner">
     <div>
-      <span class="eyebrow">HeadFirst Services</span>
-      <h1>Focused apps for people who travel and work differently.</h1>
-      <p class="lede">We build small, sharp tools instead of bloated all-in-one platforms — starting with the Digital Nomad Essentials suite for people living and working on the move.</p>
+      <span class="eyebrow">Mobile App Development Studio</span>
+      <h1>We build focused mobile apps for people who travel and work differently.</h1>
+      <p class="lede">HeadFirst Services designs and engineers Flutter + Supabase apps end to end — currently the Digital Nomad Essentials suite: VisaStay, PackLite, and ZoneLink.</p>
       <div class="hero-actions">
         <a href="#products" class="btn btn-primary">See our apps</a>
-        <a href="#about" class="btn btn-secondary">Why HeadFirst</a>
+        <a href="#about" class="btn btn-secondary">How we build</a>
       </div>
     </div>
     <div class="hero-art">
@@ -85,7 +86,7 @@
 
       <a class="product-card" href="/packlite/">
         <div class="product-top">
-          <img src="/assets/img/visastay-icon.png" alt="PackLite placeholder icon" style="opacity:0.25;">
+          <div class="product-mono">PL</div>
           <div>
             <span class="status-pill status-soon">In development</span>
           </div>
@@ -97,20 +98,21 @@
         </div>
       </a>
 
-      <div class="product-card" style="opacity:0.6;">
+      <div class="product-card" style="opacity:0.75;">
         <div class="product-top">
-          <div class="product-mono">?</div>
+          <div class="product-mono">ZL</div>
           <div>
-            <span class="status-pill status-planned">Planned</span>
+            <span class="status-pill status-planned">Early development</span>
           </div>
         </div>
         <div class="product-body">
-          <h3>Next app</h3>
-          <p>More tools for the nomad suite are in the pipeline. Future apps outside this theme will land in their own section here.</p>
+          <h3>ZoneLink</h3>
+          <p>Time zone coordination for distributed teams and nomads — best-meeting-time suggestions, DST warnings, and jet-lag planning.</p>
         </div>
       </div>
 
     </div>
+    <p style="color:var(--color-text-muted); font-size:14px; margin-top:16px;">More apps — inside and outside the nomad theme — are in the pipeline.</p>
   </div>
 </section>
 
@@ -118,24 +120,29 @@
   <div class="container">
     <div class="section-head">
       <span class="eyebrow">About</span>
-      <h2>Why HeadFirst Services</h2>
-      <p>We're a solo-built studio that ships apps we actually use ourselves — practical, well-scoped, and built to last, not chasing every feature under the sun.</p>
+      <h2>How we build</h2>
+      <p>HeadFirst Services is a mobile app development studio, not just a portfolio of side projects. Every app is engineered on the same foundation and built to a real standard: production Flutter apps, live on the App Store and Play Store, backed by proper architecture.</p>
     </div>
-    <div class="grid grid-3">
+    <div class="grid grid-2">
       <div class="card">
-        <div class="icon">1</div>
+        <div class="icon">⚙️</div>
+        <h3>Flutter + Supabase, done properly</h3>
+        <p>Every app shares a common technical foundation — Flutter/Dart, Supabase (Postgres + Auth), Riverpod, row-level security on every table — the same stack used to ship real apps to production, not prototypes.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🎯</div>
         <h3>One job, done well</h3>
         <p>Every app in the suite is built around a single, specific problem — not a bundle of half-finished features.</p>
       </div>
       <div class="card">
-        <div class="icon">2</div>
+        <div class="icon">🔒</div>
         <h3>Privacy by default</h3>
-        <p>Each app owns its own data and its own account system. Deleting one app's account never touches another.</p>
+        <p>Each app owns its own isolated backend and its own account system. Deleting one app's account never touches another, and cross-app data sharing is always explicit and user-consented.</p>
       </div>
       <div class="card">
-        <div class="icon">3</div>
+        <div class="icon">📈</div>
         <h3>Built to grow</h3>
-        <p>The suite is designed to keep expanding — new apps for nomads, and eventually new product lines entirely.</p>
+        <p>The suite is designed to keep expanding — more apps for nomads, and eventually product lines entirely outside this theme.</p>
       </div>
     </div>
   </div>
@@ -156,13 +163,14 @@
     <div class="footer-grid">
       <div>
         <h4>HeadFirst Services</h4>
-        <p style="color:var(--color-text-muted); font-size:14px; max-width:32ch;">Focused apps for people who travel and work differently.</p>
+        <p style="color:var(--color-text-muted); font-size:14px; max-width:32ch;">Mobile app development studio — Flutter + Supabase apps for people who travel and work differently.</p>
       </div>
       <div>
         <h4>Apps</h4>
         <ul>
           <li><a href="/visastay/">VisaStay</a></li>
           <li><a href="/packlite/">PackLite</a></li>
+          <li>ZoneLink <span style="color:var(--color-text-muted); font-size:12px;">(early development)</span></li>
         </ul>
       </div>
       <div>
