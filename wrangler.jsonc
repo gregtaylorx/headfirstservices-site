@@ -1,7 +1,4 @@
 {
-  "name": "headfirstservices-site",
-  "compatibility_date": "2026-07-06",
-  "assets": {
-    "directory": "./"
-  }
+  "name": "headfirstservices",
+  "pages_build_output_dir": "."
 }
