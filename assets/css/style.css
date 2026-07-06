@@ -374,6 +374,26 @@ details.faq-item[open] summary h3 { color: var(--color-primary); }
   margin-bottom: 18px;
 }
 
+/* ---------- Screenshot strip ---------- */
+.screenshot-strip {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding: 4px 4px 12px;
+  scroll-snap-type: x proximity;
+}
+.screenshot-strip img {
+  height: 380px;
+  width: auto;
+  border-radius: 22px;
+  box-shadow: var(--shadow-md);
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+}
+@media (max-width: 560px) {
+  .screenshot-strip img { height: 300px; }
+}
+
 /* ---------- Disclaimer / note boxes ---------- */
 .note-box {
   background: var(--color-bg-alt);
