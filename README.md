@@ -47,3 +47,10 @@ Either way: no build tooling, no npm install — it's just static files.
 - Android is in closed testing — update the Google Play badge in `/visastay/index.html` once it's public
 - If PackLite publishes, convert `/packlite/index.html` from teaser to full product page (mirror `/visastay/` layout)
 - Legal pages (privacy/delete-account) currently stay hosted at gregtaylorx.github.io — that's what's registered with Google Play / App Store. Don't move them without updating both store listings first.
+
+## Analytics (as of Jul 2026)
+
+- **Done:** Cloudflare Web Analytics enabled on `headfirstservices.com` (automatic setup, zone dashboard → Analytics & Logs → Web Analytics). Gives pageviews/visits/referrers/top pages — no click-level or app-store-attribution detail.
+- **TODO — near future:** Set up click tracking for key CTAs (App Store/Play Store buttons, VisaStay/PackLite cards) via Cloudflare Zaraz (dashboard: Tag Setup, `dash.cloudflare.com/?to=/:account/tag-management/zaraz`). Needs a destination to actually report on — Zaraz's own Monitoring view is real-time/debug only, not historical. Plan: create a free Google Analytics (GA4) property for headfirstservices.com, add it as a Zaraz tool, wire up click triggers on the CTA buttons.
+- **TODO — near future:** Create an App Store Connect **Campaign Link** (Analytics → Acquisition → Campaigns, token e.g. `website`) and swap it into the App Store button href on `/visastay/index.html` in place of the plain `apps.apple.com` link. This is the only way to separate "downloaded after clicking through from our site" from organic App Store discovery — Cloudflare has no visibility once a visitor leaves for apps.apple.com. Needs 5+ first-time downloads via the link before data appears, ~24h delay.
+- Once Android is public, same idea applies on the Play Store side via Google Play Console's install referrer / UTM tracking.
