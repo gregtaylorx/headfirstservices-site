@@ -46,7 +46,7 @@ Either way: no build tooling, no npm install — it's just static files.
 - Submit `https://headfirstservices.com/sitemap.xml` in Google Search Console + Bing Webmaster Tools
 - Android is in closed testing — update the Google Play badge in `/visastay/index.html` once it's public
 - If PackLite publishes, convert `/packlite/index.html` from teaser to full product page (mirror `/visastay/` layout)
-- Legal pages (privacy/delete-account) currently stay hosted at gregtaylorx.github.io — that's what's registered with Google Play / App Store. Don't move them without updating both store listings first.
+- Legal pages (privacy/terms/delete-account) are still physically hosted on the `gregtaylorx.github.io` repo, served via the `privacy.headfirstservices.com` CNAME (already live, same content, confirmed Jul 2026). All on-site links across this Pages project now point to `https://privacy.headfirstservices.com/...` instead of the raw `gregtaylorx.github.io` domain (looks more professional). **Google Play / App Store listings still reference the raw `gregtaylorx.github.io` URLs directly** (per VisaStay CLAUDE.md) — that's a separate store-console change, not done here. Don't repoint the underlying GitHub Pages repo or drop the `gregtaylorx.github.io` host without updating both store listings first.
 
 ## Analytics (as of Jul 2026)
 

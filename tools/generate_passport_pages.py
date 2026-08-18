@@ -35,6 +35,16 @@ ENTRY_LABELS = {
     "visa_required": "Visa required",
 }
 
+# Region groupings for the "Related passports" cross-links, mirroring the
+# region cards on /visastay/supported-passports/. Keep in sync with that page.
+REGIONS = {
+    "Americas": ["US", "CA", "MX", "BR"],
+    "Europe": ["GB", "DE", "FR", "IT", "ES", "PT", "NL", "BE", "AT", "CH", "SE", "NO", "PL"],
+    "Asia-Pacific": ["IN", "CN", "JP", "KR", "SG", "MY", "ID", "PH", "TH", "VN", "AU", "NZ"],
+    "Middle East & Africa": ["AE", "ZA", "TZ"],
+}
+CODE_TO_REGION = {code: region for region, codes in REGIONS.items() for code in codes}
+
 PAGE_TEMPLATE = """<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -179,6 +189,10 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
       <a href="/visastay/" class="btn btn-primary">See VisaStay →</a>
     </div>
 
+    <h2>Related passports</h2>
+    <p style="color:var(--color-text-muted); font-size:14px;">Other ⟦REGION⟧ passports covered by VisaStay:</p>
+    <p>⟦RELATED_LINKS⟧</p>
+
     <p style="margin-top:24px; color:var(--color-text-muted); font-size:15px;">Related: see <a href="/visastay/supported-passports/">all supported passports</a>, or check the <a href="/visastay/faq/">full FAQ</a>.</p>
 
   </div>
@@ -189,7 +203,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
     <div class="footer-grid">
       <div>
         <h4>VisaStay</h4>
-        <p style="color:var(--color-text-muted); font-size:14px; max-width:32ch;">Part of the Digital Nomad Essentials suite by HeadFirst Services.</p>
+        <p style="color:var(--color-text-muted); font-size:14px; max-width:32ch;">Part of the Outbound Suite by HeadFirst Services.</p>
       </div>
       <div>
         <h4>Guides</h4>
@@ -210,8 +224,9 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
       <div>
         <h4>Legal</h4>
         <ul>
-          <li><a href="https://gregtaylorx.github.io/privacy.html">Privacy Policy</a></li>
-          <li><a href="https://gregtaylorx.github.io/delete-account.html">Delete Account</a></li>
+          <li><a href="https://privacy.headfirstservices.com/privacy.html">Privacy Policy</a></li>
+          <li><a href="https://privacy.headfirstservices.com/terms.html">Terms of Service</a></li>
+          <li><a href="https://privacy.headfirstservices.com/delete-account.html">Delete Account</a></li>
         </ul>
       </div>
     </div>
@@ -331,6 +346,12 @@ def generate(code):
 
     table_rows = "\n".join(build_row(d) for d in destinations)
 
+    region = CODE_TO_REGION.get(code, "")
+    related_codes = [c for c in REGIONS.get(region, []) if c != code and c in META]
+    related_links = " · ".join(
+        f'<a href="/visastay/passports/{c.lower()}/">{META[c]["name"]}</a>' for c in related_codes
+    ) or "See all supported passports below."
+
     html = PAGE_TEMPLATE
     replacements = {
         "⟦TITLE⟧": f"{name} Passport Visa Requirements — Where Can {demonym.capitalize()} Travel Visa-Free? | VisaStay",
@@ -350,6 +371,8 @@ def generate(code):
         "⟦TABLE_ROWS⟧": table_rows,
         "⟦FAQ1_ANSWER⟧": faq1,
         "⟦FAQ2_ANSWER⟧": faq2,
+        "⟦REGION⟧": region,
+        "⟦RELATED_LINKS⟧": related_links,
     }
     for token, value in replacements.items():
         html = html.replace(token, value)
