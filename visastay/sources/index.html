@@ -65,7 +65,7 @@
     <a class="back-link" href="/visastay/">← VisaStay</a>
     <span class="eyebrow">Data Sources</span>
     <h1>Official sources</h1>
-    <p class="lede">Where VisaStay's visa, tax-residency, and pre-arrival data comes from — last reviewed August 2026.</p>
+    <p class="lede">Where VisaStay's visa, tax-residency, and pre-arrival data comes from — last reviewed September 2026.</p>
   </div>
 </section>
 
@@ -75,6 +75,8 @@
     <div class="note-box" style="margin-bottom:28px;">
       <strong>VisaStay is an independent app.</strong> It is not affiliated with, endorsed by, or operated by any government or immigration authority. Visa and immigration rules can change without notice. Always confirm your specific situation on the official government source(s) linked below, or with a licensed immigration professional, before making travel decisions.
     </div>
+
+    <p>For major, high-traffic destinations, every rule is verified directly against the destination's official government immigration authority. For the remaining destinations, rules are cross-checked against multiple independent travel-data services rather than a single source, and updated whenever those services or a user's "Report change" flag a discrepancy.</p>
 
     <h2>Visa &amp; entry rules — official immigration sources</h2>
     <table class="sources-table">
@@ -108,11 +110,21 @@
     </table>
     <p style="color:var(--color-text-muted); font-size:14px;">For any destination not listed above, VisaStay's data is verified against that country's national immigration authority or Ministry of Foreign Affairs visa page, with embassy sites as a fallback. Email <a href="mailto:support@headfirstservices.com">support@headfirstservices.com</a> if you'd like the specific source for a country not shown here.</p>
 
+    <h2>Cross-check services</h2>
+    <p style="color:var(--color-text-muted); font-size:14px;">Used for broad coverage and second opinions, alongside the official government sources above.</p>
+    <table class="sources-table">
+      <tr><th>Service</th><th>Used for</th></tr>
+      <tr><td><a href="https://github.com/ilyankou/passport-index-dataset">Passport Index dataset</a></td><td>Bulk visa-requirement data by passport</td></tr>
+      <tr><td><a href="https://www.passportindex.org">Passport Index</a></td><td>Individual passport/destination lookups</td></tr>
+      <tr><td><a href="https://www.henleyglobal.com/passport-index">Henley Passport Index</a></td><td>Second opinion on disputed pairs</td></tr>
+      <tr><td>Wikipedia — "Visa requirements for [passport] citizens"</td><td>Per-passport reference tables</td></tr>
+      <tr><td>IATA Timatic (via airline tools: klm.com, united.com, emirates.com)</td><td>Airline-grade requirement checks</td></tr>
+    </table>
+
     <h2>Tax residency thresholds</h2>
     <table class="sources-table">
       <tr><th>Source</th><th>Use</th></tr>
       <tr><td><a href="https://www.oecd.org">OECD — Rules governing tax residence</a></td><td>Canonical per-country residency criteria</td></tr>
-      <tr><td><a href="https://taxsummaries.pwc.com">PwC Worldwide Tax Summaries</a></td><td>Current day-count thresholds by country</td></tr>
       <tr><td>National revenue authorities</td><td>e.g. <a href="https://www.rd.go.th">rd.go.th</a> (Thailand), <a href="https://www.hasil.gov.my">hasil.gov.my</a> (Malaysia), <a href="https://www.irs.gov">irs.gov</a> (US Substantial Presence), <a href="https://www.gov.uk">gov.uk</a> (UK Statutory Residence Test)</td></tr>
     </table>
     <p style="color:var(--color-text-muted); font-size:14px;">Tax residency rules often involve more than a simple day count (ties, domicile, split-year and lookback provisions). VisaStay's in-app alerts track the day-count trigger only — always confirm with a licensed tax professional before making a residency decision.</p>
