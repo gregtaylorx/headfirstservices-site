@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>How Long Can I Stay? Visa Stay Checker by Passport | VisaStay</title>
+<title>How Long Can I Stay? Free Visa Stay Checker &amp; Tracker | VisaStay</title>
 <meta name="description" content="Free visa stay checker: pick your passport and destination to see whether you need a visa, how many days you can stay, and your leave-by date. 157 destinations, 54 passports.">
 <link rel="canonical" href="https://headfirstservices.com/visastay/check/">
 <link rel="icon" href="/assets/img/visastay-icon.png">
@@ -40,7 +40,8 @@
 }
 </script>
 <style>
-  .checker { background: var(--color-bg-alt); border: 1px solid var(--color-border); border-radius: 16px; padding: 24px; }
+  #check { scroll-margin-top: 72px; }
+  .checker { background: #fff; border: 1px solid var(--color-border); border-radius: 16px; padding: 24px; }
   .checker-grid { display: grid; grid-template-columns: 1fr 1fr 180px; gap: 14px; align-items: end; }
   .checker label { display: block; font-size: 13px; font-weight: 600; color: var(--color-text-muted); margin-bottom: 6px; }
   .checker select, .checker input { width: 100%; box-sizing: border-box; font: inherit; font-size: 16px; padding: 11px 12px; border: 1px solid var(--color-border); border-radius: 10px; background: #fff; color: var(--color-text); }
@@ -66,6 +67,8 @@
   .result-cta { margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--color-border); }
   .result-cta p { margin: 0 0 12px; font-size: 15px; }
   .err { color: #b42318; font-size: 15px; }
+  .check-hero-img { width: auto; max-width: 280px !important; border-radius: 20px !important; }
+  @media (max-width: 860px) { .check-hero-art { display: none !important; } }
   @media (max-width: 720px) { .checker-grid { grid-template-columns: 1fr; } .result-days { font-size: 34px; } .result-list li { grid-template-columns: 1fr; gap: 2px; } .result-list li strong { font-size: 13px; color: var(--color-text-muted); } }
 </style>
 </head>
@@ -80,22 +83,101 @@
     <div class="nav-links">
       <a href="/visastay/">VisaStay</a>
       <a href="/visastay/faq/">FAQ</a>
+      <a href="#check">Stay checker</a>
       <a href="#get-app" class="nav-cta">Get the app</a>
     </div>
   </div>
 </nav>
 
-<section class="hero">
-  <div class="container" style="max-width:860px;">
-    <a class="back-link" href="/visastay/">← VisaStay</a>
-    <span class="eyebrow">Free stay checker</span>
-    <h1>How long can I stay?</h1>
-    <p class="lede">Pick your passport and destination to see the entry type, the maximum stay, and the date you need to leave by. No account needed.</p>
+<section class="hero with-bg">
+  <div class="container hero-inner">
+    <div>
+      <a class="back-link" href="/visastay/">← VisaStay</a>
+      <span class="eyebrow">Visa stay checker + tracker</span>
+      <h1>Know exactly how long you can stay — before you go.</h1>
+      <p class="lede">Overstays happen when you're counting days in your head. VisaStay knows the entry rules for 157 destinations and 54 passports, tells you your leave-by date, and keeps counting for you — every trip, every border, including Schengen's 90/180 rule.</p>
+      <div class="hero-actions">
+        <a href="#check" class="btn btn-primary">Check a trip free ↓</a>
+        <div class="store-badges">
+          <a class="store-badge" href="https://play.google.com/store/apps/details?id=com.digitalnomadessentials.digital_nomad_essentials&amp;referrer=utm_source%3Dheadfirstservices%26utm_medium%3Dweb%26utm_campaign%3Dstay_checker%26utm_content%3Dhero" target="_blank" rel="noopener"><span>▶<span class="sub">Google Play</span><br>Download now</span></a>
+          <a class="store-badge" href="https://apps.apple.com/us/app/visastay/id6776447080" target="_blank" rel="noopener"><span>🍎<span class="sub">App Store</span><br>Download now</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="hero-art check-hero-art">
+      <img src="/assets/img/visastay-store-01_days-remain.webp" alt="VisaStay showing 12 visa days left in Fiji with the exit date" width="300" height="649" class="check-hero-img">
+    </div>
   </div>
 </section>
 
 <section style="padding-top:0;">
+  <div class="container">
+    <div class="screenshot-strip store">
+      <img src="/assets/img/visastay-store-02_check-future-trips.webp" alt="Check future trips before you book — Schengen breach warning on a planned trip" width="240" height="519" loading="lazy">
+      <img src="/assets/img/visastay-store-03_calendar.webp" alt="Every deadline in one calendar — trips, Schengen days, ETIAS and extensions" width="240" height="519" loading="lazy">
+      <img src="/assets/img/visastay-store-04_reminders.webp" alt="Get reminders before your stay expires" width="240" height="519" loading="lazy">
+      <img src="/assets/img/visastay-store-05_where-next.webp" alt="Find visa-free options for your passport" width="240" height="519" loading="lazy">
+      <img src="/assets/img/visastay-store-06_tax-residency.webp" alt="Track tax-residency thresholds" width="240" height="519" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<section class="section-alt">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Why travelers use VisaStay</span>
+      <h2>A one-off answer is easy. Staying compliant all year isn't.</h2>
+      <p>Fines, entry bans and cancelled onward trips usually come from small counting mistakes — a Schengen day you forgot, a rule that changed, a planned trip that quietly breaks a limit.</p>
+    </div>
+    <div class="grid grid-3">
+      <div class="card">
+        <div class="icon">⏳</div>
+        <h3>Your leave-by date, always visible</h3>
+        <p>Every trip shows a live countdown from your passport's entry rule, color-coded from "Good" to "Act now".</p>
+      </div>
+      <div class="card">
+        <div class="icon">🇪🇺</div>
+        <h3>Schengen 90/180, done for you</h3>
+        <p>The rolling window is totalled across every Schengen trip automatically — no spreadsheets, no mental maths.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🧭</div>
+        <h3>Catch problems before you book</h3>
+        <p>Add a future trip and VisaStay flags a visa or Schengen breach before you've paid for the flight.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🔔</div>
+        <h3>Reminders that reach you</h3>
+        <p>Push and email alerts before a stay ends, before your passport expires, and before you hit a tax-residency threshold.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🌍</div>
+        <h3>"Where next?" when days run low</h3>
+        <p>See every destination your passport enters visa-free or on arrival, longest stay first.</p>
+      </div>
+      <div class="card">
+        <div class="icon">📶</div>
+        <h3>Works offline, private by design</h3>
+        <p>Countdowns and trips work without signal. No location tracking, biometric lock, export your data any time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container" style="max-width:680px; text-align:center;">
+    <p style="font-size:20px; line-height:1.5; margin-bottom:16px;">"I tried this on a whim and wish it had been in place when I was living overseas moving country to country. There's no other product that lets you easily enter your travel dates and keep track of your visas and travel requirements so seamlessly."</p>
+    <p style="color:var(--color-text-muted); font-size:14px;">★★★★★ — App Store review</p>
+  </div>
+</section>
+
+<section id="check" class="section-alt">
   <div class="container" style="max-width:860px;">
+    <div class="section-head" style="margin-bottom:20px;">
+      <span class="eyebrow">Free stay checker</span>
+      <h2>How long can I stay?</h2>
+      <p>Try it now — pick your passport and destination to see the entry type, the maximum stay, and your leave-by date. No account needed.</p>
+    </div>
 
     <form class="checker" id="checker" novalidate>
       <div class="checker-grid">
@@ -121,6 +203,11 @@
     <noscript><p class="err" style="margin-top:16px;">The stay checker needs JavaScript. You can get the same answer in the VisaStay app.</p></noscript>
 
     <div id="result" aria-live="polite"></div>
+  </div>
+</section>
+
+<section>
+  <div class="container" style="max-width:860px;">
 
     <h2 style="margin-top:48px;">What this checker shows</h2>
     <p>For each passport and destination, VisaStay holds the standard short-stay entry rule: whether you can enter visa-free, get a visa on arrival, apply online (eVisa or electronic travel authorisation), or need a visa before you travel — plus the maximum stay per entry, whether it can be extended in-country, and any pre-arrival requirements.</p>
@@ -350,6 +437,7 @@
     lookup(pp, dd, en);
   });
 
+  if ($p.value && $d.value && qd) { document.getElementById('check').scrollIntoView(); }
   if ($p.value && $d.value && qd) $form.requestSubmit ? $form.requestSubmit() : $form.dispatchEvent(new Event('submit'));
 })();
 </script>
