@@ -38,12 +38,23 @@ ENTRY_LABELS = {
 # Region groupings for the "Related passports" cross-links, mirroring the
 # region cards on /visastay/supported-passports/. Keep in sync with that page.
 REGIONS = {
-    "Americas": ["US", "CA", "MX", "BR"],
-    "Europe": ["GB", "DE", "FR", "IT", "ES", "PT", "NL", "BE", "AT", "CH", "SE", "NO", "PL"],
-    "Asia-Pacific": ["IN", "CN", "JP", "KR", "SG", "MY", "ID", "PH", "TH", "VN", "AU", "NZ"],
-    "Middle East & Africa": ["AE", "ZA", "TZ"],
+    "Americas": ["US", "CA", "MX", "BR", "AR", "CO", "CL", "PE"],
+    "Europe": ["GB", "IE", "DE", "FR", "IT", "ES", "PT", "NL", "BE", "AT", "CH", "SE", "NO", "PL", "CZ", "RO", "RS", "UA", "TR", "RU"],
+    "Asia-Pacific": ["IN", "CN", "HK", "TW", "JP", "KR", "SG", "MY", "ID", "PH", "TH", "VN", "AU", "NZ", "PK", "BD", "LK", "KZ", "TJ"],
+    "Middle East": ["AE", "SA", "QA", "KW", "BH", "OM", "JO", "IL"],
+    "Africa": ["ZA", "TZ", "KE", "NG", "GH", "CI", "EG", "MA", "DZ"],
 }
 CODE_TO_REGION = {code: region for region, codes in REGIONS.items() for code in codes}
+
+# EU/EEA/Swiss passports: freedom of movement, no 90/180 limit. Mirrors
+# kSchengenFreeMovementPassports in the app (Schengen members + IE, CY).
+FREE_MOVEMENT = {
+    "AT", "BE", "HR", "CZ", "DK", "EE", "FI", "FR", "DE", "GR", "HU", "IS", "IT",
+    "LV", "LI", "LT", "LU", "MT", "NL", "NO", "PL", "PT", "SK", "SI", "ES", "SE",
+    "CH", "BG", "RO", "IE", "CY",
+}
+NO_LIMIT_DAYS = 999  # app sentinel: >= 999 means no stay limit
+DATA_DATE = os.environ.get("DATA_DATE", "")
 
 PAGE_TEMPLATE = """<!DOCTYPE html>
 <html lang="en">
@@ -166,7 +177,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
     </div>
 
     <div class="note-box" style="margin:24px 0;">
-      Visa rules are provided for planning purposes and are not legal or immigration advice. Entry requirements can change without notice — always confirm current requirements with the relevant embassy or consulate before you travel.
+      ⟦DATA_DATE_LINE⟧Visa rules are provided for planning purposes and are not legal or immigration advice. Entry requirements can change without notice — always confirm current requirements with the relevant embassy or consulate before you travel.
     </div>
 
     <h2>Common questions</h2>
@@ -264,6 +275,8 @@ def build_row(dest):
 
     if entry == "visa_required" or not m or m == "0":
         stay = "—"
+    elif int(m) >= NO_LIMIT_DAYS:
+        stay = "No limit"
     else:
         stay = f"{m} days"
 
@@ -303,7 +316,8 @@ def generate(code):
     name = meta["name"]
     demonym = meta["demonym"]
     flag = meta["flag"]
-    schengen_subject = meta["schengen_subject"]
+    free_movement = code in FREE_MOVEMENT
+    sve = meta.get("schengen_visa_exempt", False)
     slug = code.lower()
     canonical = f"https://headfirstservices.com/visastay/passports/{slug}/"
 
@@ -319,28 +333,38 @@ def generate(code):
         f"require a visa arranged in advance."
     )
 
-    if schengen_subject:
+    guide = '<a href="/visastay/schengen-90-180-rule/">Read the full guide →</a>'
+    if free_movement:
         faq2 = (
-            f"Yes. {demonym.capitalize()} are limited to 90 days within any rolling 180-day period across "
-            f"the entire Schengen Area — it's not a per-country allowance."
+            f"No. {demonym[:1].upper() + demonym[1:]} have freedom-of-movement rights within the EU/EEA and Switzerland, "
+            f"so the 90/180-day limit that applies to non-EU visitors does not apply."
         )
         schengen_note = (
             '<div class="note-box" style="margin:20px 0;">'
-            f'<strong>Schengen travelers:</strong> {demonym} are subject to the 90/180-day rule across the whole '
-            'Schengen Area, not per country. '
-            '<a href="/visastay/schengen-90-180-rule/">Read the full guide →</a>'
+            f'<strong>Schengen:</strong> {demonym} are not subject to the 90/180-day rule within the '
+            'EU/EEA/Switzerland thanks to freedom-of-movement rights. Travel elsewhere follows the entry types below.'
+            '</div>'
+        )
+    elif sve:
+        faq2 = (
+            f"Yes. {demonym[:1].upper() + demonym[1:]} can visit the Schengen Area visa-free, but only for 90 days within any "
+            f"rolling 180-day period across the whole area — it's not a per-country allowance."
+        )
+        schengen_note = (
+            '<div class="note-box" style="margin:20px 0;">'
+            f'<strong>Schengen:</strong> {demonym} enter visa-free but are limited to 90 days in any rolling '
+            f'180-day period across the whole Schengen Area, not per country. {guide}'
             '</div>'
         )
     else:
         faq2 = (
-            f"No. {demonym.capitalize()} have freedom-of-movement rights within the EU/EEA and Switzerland, "
-            f"so the 90/180-day limit that applies to non-EU visitors does not apply here."
+            f"Yes. {demonym[:1].upper() + demonym[1:]} need a Schengen short-stay (C) visa, and stays on it count toward the "
+            f"same 90 days in any rolling 180-day period across the whole Schengen Area."
         )
         schengen_note = (
             '<div class="note-box" style="margin:20px 0;">'
-            f'<strong>Schengen travelers:</strong> {demonym} are not subject to the 90/180-day rule within the '
-            'EU/EEA/Switzerland thanks to freedom-of-movement rights. Traveling further afield still follows the '
-            f'entry types listed below.'
+            f'<strong>Schengen:</strong> {demonym} need a Schengen short-stay visa. Stays on it are limited to '
+            f'90 days in any rolling 180-day period across the whole area. {guide}'
             '</div>'
         )
 
@@ -354,7 +378,7 @@ def generate(code):
 
     html = PAGE_TEMPLATE
     replacements = {
-        "⟦TITLE⟧": f"{name} Passport Visa Requirements — Where Can {demonym.capitalize()} Travel Visa-Free? | VisaStay",
+        "⟦TITLE⟧": f"{name} Passport Visa Requirements — Where Can {demonym[:1].upper() + demonym[1:]} Travel Visa-Free? | VisaStay",
         "⟦META_DESC⟧": f"Full visa requirement breakdown for {demonym}: {visa_free} visa-free destinations, {easy} via eTA/eVisa/visa on arrival, and {required} requiring a visa in advance, across {total} countries.",
         "⟦CANONICAL⟧": canonical,
         "⟦OG_TITLE⟧": f"{name} Passport Visa Requirements | VisaStay",
@@ -373,6 +397,7 @@ def generate(code):
         "⟦FAQ2_ANSWER⟧": faq2,
         "⟦REGION⟧": region,
         "⟦RELATED_LINKS⟧": related_links,
+        "⟦DATA_DATE_LINE⟧": (f"Data last updated {DATA_DATE}. " if DATA_DATE else "") + 'See <a href="/visastay/sources/">our sources</a>. ',
     }
     for token, value in replacements.items():
         html = html.replace(token, value)
@@ -386,13 +411,48 @@ def generate(code):
     print(f"OK   {code} -> {out_path}  ({total} destinations, {visa_free} visa-free)")
 
 
+
+SUPPORTED_PAGE = os.path.join(SITE_DIR, "visastay", "supported-passports", "index.html")
+GRID_START = '<div class="grid grid-3" style="margin-top:20px;">'
+GRID_END = '<div class="note-box" style="margin-top:24px;">'
+
+
+def update_supported_page(n_passports, n_destinations):
+    """Rewrites the region cards + counts on /visastay/supported-passports/."""
+    import re
+    with open(SUPPORTED_PAGE, encoding="utf-8") as f:
+        s = f.read()
+    cards = []
+    for region, codes in REGIONS.items():
+        links = ", ".join(
+            f'<a href="/visastay/passports/{c.lower()}/">{META[c]["name"]}</a>'
+            for c in sorted((c for c in codes if c in META), key=lambda c: META[c]["name"])
+        )
+        cards.append(f'      <div class="card">\n        <h3>{region}</h3>\n        <p>{links}</p>\n      </div>')
+    missing = [c for c in META if c not in CODE_TO_REGION]
+    if missing:
+        raise SystemExit(f"Add these passports to REGIONS: {missing}")
+    i = s.index(GRID_START) + len(GRID_START)
+    j = s.index(GRID_END)
+    s = s[:i] + "\n" + "\n".join(cards) + "\n    </div>\n\n    " + s[j:]
+    s = re.sub(r"\b\d+\+? passport nationalities", f"{n_passports}+ passport nationalities", s)
+    s = re.sub(r"All \d+ passports below", f"All {n_passports} passports below", s)
+    s = re.sub(r"\b\d+ (supported )?destination", lambda m: f"{n_destinations} {m.group(1) or ''}destination", s)
+    s = re.sub(r"any of \d+ destinations", f"any of {n_destinations} destinations", s)
+    with open(SUPPORTED_PAGE, "w", encoding="utf-8") as f:
+        f.write(s)
+    print(f"OK   supported-passports page: {n_passports} passports, {n_destinations} destinations")
+
 def main():
     codes = sorted(
-        fn[:-5] for fn in os.listdir(DATA_DIR) if fn.endswith(".json")
+        fn[:-5] for fn in os.listdir(DATA_DIR) if fn.endswith(".json") and len(fn) == 7
     )
     print(f"Found {len(codes)} passport data files: {', '.join(codes)}\n")
     for code in codes:
         generate(code)
+    with open(os.path.join(DATA_DIR, "destinations.json"), encoding="utf-8") as f:
+        n_dest = len(json.load(f))
+    update_supported_page(len(codes), n_dest)
 
 
 if __name__ == "__main__":

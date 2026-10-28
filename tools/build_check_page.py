@@ -1,7 +1,7 @@
 """Builds /visastay/check/index.html from check_template.html.
 
-Passport list + official-info URLs are read from the VisaStay app repo
-(country_constants.dart, visa_info_urls.dart) so the page stays in sync with
+Passport list from tools/passport_meta.json; official-info URLs from the
+VisaStay app repo (visa_info_urls.dart) so the page stays in sync with
 the app. Destination list = countries table (code, name). Re-run after adding
 a passport or destination:  python tools/build_check_page.py
 """
@@ -10,9 +10,10 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 SITE = os.path.dirname(HERE)
 APP = os.environ.get('VISASTAY_REPO', os.path.join(SITE, '..', '..', 'VisaStay'))
 
-src = open(os.path.join(APP, 'packages/core/lib/src/utils/country_constants.dart'), encoding='utf-8').read()
-pp = re.findall(r"\('([A-Z]{2})', '([^']+)', '[^']*'\)", src.split('kSupportedPassports')[1].split('];')[0])
-pp = sorted([[c, 'United Arab Emirates' if n == 'UAE' else n] for c, n in pp], key=lambda x: x[1])
+# Passports = tools/passport_meta.json (mirrors supported_passports in the DB;
+# refreshed together with tools/data/ by the passport-pages data pull).
+meta = json.load(open(os.path.join(HERE, 'passport_meta.json'), encoding='utf-8'))
+pp = sorted([[c, m['name']] for c, m in meta.items()], key=lambda x: x[1])
 
 s = open(os.path.join(APP, 'lib/app/utils/visa_info_urls.dart'), encoding='utf-8').read()
 body = s[s.index('{', s.index('static const Map<String, String> _urls')):]
