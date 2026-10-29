@@ -266,7 +266,11 @@ def entry_label(e):
     return ENTRY_LABELS.get(e, e)
 
 
-def build_row(dest):
+PAIR_DESTS = {"TH", "ID", "VN", "MY", "PH", "JP", "KR", "SG", "AE", "TR", "GE",
+              "PT", "ES", "IT", "FR", "GB", "US", "MX", "CO", "BR"}  # keep in sync with generate_pair_pages.py
+
+
+def build_row(dest, pp=""):
     name = dest["n"]
     entry = dest["e"]
     m = dest.get("m")
@@ -285,9 +289,13 @@ def build_row(dest):
     else:
         ext = "No"
 
+    if dest["c"] in PAIR_DESTS and pp and pp != dest["c"]:
+        name_cell = f'<td style="padding:8px;"><a href="/visastay/passports/{pp.lower()}/{dest["c"].lower()}/">{name}</a></td>'
+    else:
+        name_cell = f'<td style="padding:8px;">{name}</td>'
     return (
         f'        <tr data-name="{name.lower()}" style="border-bottom:1px solid var(--color-border);">'
-        f'<td style="padding:8px;">{name}</td>'
+        f'{name_cell}'
         f'<td style="padding:8px;">{entry_label(entry)}</td>'
         f'<td style="padding:8px;">{stay}</td>'
         f'<td style="padding:8px;">{ext}</td>'
@@ -368,7 +376,7 @@ def generate(code):
             '</div>'
         )
 
-    table_rows = "\n".join(build_row(d) for d in destinations)
+    table_rows = "\n".join(build_row(d, code) for d in destinations)
 
     region = CODE_TO_REGION.get(code, "")
     related_codes = [c for c in REGIONS.get(region, []) if c != code and c in META]
