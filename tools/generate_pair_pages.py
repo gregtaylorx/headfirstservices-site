@@ -63,11 +63,11 @@ def answer(meta, country, r):
     elif e == "visa_on_arrival":
         short, a = "Visa on arrival", f"{cap(dem)} can get a visa on arrival in {country}, valid {stay}."
     elif e == "evisa":
-        short, a = "eVisa required", f"Yes. {cap(dem)} need an eVisa, applied for online before travelling to {country}. It allows stays {stay}."
+        short, a = "eVisa required", f"Yes. {cap(dem)} need an eVisa, applied for online before traveling to {country}. It allows stays {stay}."
     elif e == "eta":
-        short, a = "Travel authorisation required", f"No visa, but {dem} need an electronic travel authorisation before travelling to {country}. Stays are allowed {stay}."
+        short, a = "Travel authorization required", f"No visa, but {dem} need an electronic travel authorization before traveling to {country}. Stays are allowed {stay}."
     else:
-        short, a = "Visa required", f"Yes. {cap(dem)} need a visa issued by an embassy or consulate of {country} before travelling."
+        short, a = "Visa required", f"Yes. {cap(dem)} need a visa issued by an embassy or consulate of {country} before traveling."
     if e != "visa_required" and m < 999:
         if r.get("x") and r.get("xd"):
             a += f" The stay can be extended by up to {r['xd']} days."
