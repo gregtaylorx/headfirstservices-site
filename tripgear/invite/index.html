@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get TripGear</title>
+<meta name="description" content="A friend invited you to TripGear — packing lists that learn what you actually use.">
+<link rel="canonical" href="https://headfirstservices.com/tripgear/invite/">
+<link rel="stylesheet" href="/assets/css/style.css">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Get TripGear">
+<meta property="og:description" content="A friend invited you to TripGear — packing lists that learn what you actually use.">
+<meta property="og:url" content="https://headfirstservices.com/tripgear/invite/">
+<meta name="robots" content="noindex">
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="container">
+    <a class="brand-mark" href="/">
+      <span class="mono">HF</span>
+      HeadFirst Services
+    </a>
+    <div class="nav-links">
+      <a href="/tripgear/">TripGear</a>
+      <a href="/tripgear/faq/">FAQ</a>
+      <a href="/tripgear/support/" class="nav-cta">Support</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <span class="eyebrow">You're invited</span>
+    <h1>Get TripGear</h1>
+    <p class="lede">Weather-aware packing lists that learn what you actually use, trip after trip.</p>
+    <p><a id="play" class="nav-cta" style="display:inline-block;padding:12px 20px;"
+       href="https://play.google.com/store/apps/details?id=com.digitalnomadessentials.packlite">Get it on Google Play</a></p>
+    <p id="ios" style="color:var(--color-text-muted);">iPhone version coming soon.</p>
+    <p><a href="/tripgear/">What is TripGear?</a></p>
+  </div>
+</section>
+
+<script>
+// Invite links: /tripgear/invite/?ref=<code>. The code rides to Play as the
+// install referrer (referrer=ref%3D<code>); the app reads it on first launch.
+(function () {
+  var m = /[?&]ref=([A-Za-z0-9]{4,16})/.exec(location.search);
+  var play = 'https://play.google.com/store/apps/details?id=com.digitalnomadessentials.packlite';
+  if (m) play += '&referrer=' + encodeURIComponent('ref=' + m[1].toLowerCase());
+  document.getElementById('play').href = play;
+  var ua = navigator.userAgent || '';
+  if (/Android/i.test(ua)) { location.replace(play); }
+})();
+</script>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h4>TripGear</h4>
+        <p style="color:var(--color-text-muted); font-size:14px; max-width:32ch;">Part of the Outbound Suite by HeadFirst Services. Coming to the App Store and Google Play.</p>
+      </div>
+      <div>
+        <h4>Help</h4>
+        <ul>
+          <li><a href="/tripgear/">Overview</a></li>
+          <li><a href="/tripgear/faq/">FAQ</a></li>
+          <li><a href="/tripgear/support/">Support</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="/tripgear/privacy/">Privacy Policy</a></li>
+          <li><a href="/tripgear/terms/">Terms of Service</a></li>
+          <li><a href="/tripgear/delete-account/">Delete Account</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:support@headfirstservices.com">support@headfirstservices.com</a></li>
+          <li><a href="/">HeadFirst Services</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 HeadFirst Services. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
