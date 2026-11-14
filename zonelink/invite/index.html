@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get ZoneLink</title>
+<meta name="description" content="A friend invited you to ZoneLink — the visual, sleep-aware time-zone planner. Free to use, no ads.">
+<link rel="canonical" href="https://headfirstservices.com/zonelink/invite/">
+<link rel="icon" href="/assets/img/zonelink-icon.png">
+<link rel="stylesheet" href="/assets/css/style.css">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Get ZoneLink">
+<meta property="og:description" content="A friend invited you to ZoneLink — find the best time to meet across every time zone. Free to use, no ads.">
+<meta property="og:url" content="https://headfirstservices.com/zonelink/invite/">
+<meta property="og:image" content="https://headfirstservices.com/assets/img/zonelink-icon.png">
+<meta name="robots" content="noindex">
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="container">
+    <a class="brand-mark" href="/">
+      <span class="mono">HF</span>
+      HeadFirst Services
+    </a>
+    <div class="nav-links">
+      <a href="/zonelink/">ZoneLink</a>
+      <a href="/zonelink/faq/">FAQ</a>
+      <a href="/zonelink/support/" class="nav-cta">Support</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero with-bg">
+  <div class="container hero-inner">
+    <div>
+      <span class="eyebrow">You're invited</span>
+      <h1>Get ZoneLink</h1>
+      <p class="lede">The visual, sleep-aware time-zone planner. See every zone on one ribbon, get the best times to meet ranked for you, and share one card that shows everyone their own local time. Free to use, no ads.</p>
+      <div class="hero-actions">
+        <div class="store-badges">
+          <a class="store-badge" id="play" href="https://play.google.com/store/apps/details?id=com.digitalnomadessentials.zonelink" rel="noopener">
+            <span>▶<span class="sub">Google Play</span><br>Download now</span>
+          </a>
+          <a class="store-badge" id="ios" href="https://apps.apple.com/app/id6794818466" rel="noopener">
+            <span>🍎<span class="sub">App Store</span><br>Download now</span>
+          </a>
+        </div>
+      </div>
+      <p style="margin-top:18px;"><a href="/zonelink/">What is ZoneLink?</a></p>
+    </div>
+    <div class="hero-art">
+      <img src="/assets/img/zonelink-icon.png" alt="ZoneLink app icon">
+    </div>
+  </div>
+</section>
+
+<script>
+// Invite links: /zonelink/invite/?ref=<code> (code = 4-16 letters/digits).
+// Android: Play with the code as the install referrer (referrer=ref%3D<code>);
+// the app reads it on first launch. iPhone/iPad: App Store. Anything else:
+// this page, with both badges (Play badge carries the referrer too).
+(function () {
+  var PLAY = 'https://play.google.com/store/apps/details?id=com.digitalnomadessentials.zonelink';
+  var IOS = 'https://apps.apple.com/app/id6794818466';
+  var m = /[?&]ref=([A-Za-z0-9]{4,16})(?:&|$)/.exec(location.search);
+  var play = m ? PLAY + '&referrer=' + encodeURIComponent('ref=' + m[1].toLowerCase()) : PLAY;
+  document.getElementById('play').href = play;
+  document.getElementById('ios').href = IOS;
+  var ua = navigator.userAgent || '';
+  var isIOS = /iPhone|iPad|iPod/i.test(ua) || (/Macintosh/i.test(ua) && navigator.maxTouchPoints > 1);
+  if (/Android/i.test(ua)) { location.replace(play); }
+  else if (isIOS) { location.replace(IOS); }
+})();
+</script>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h4>ZoneLink</h4>
+        <p style="color:var(--color-text-muted); font-size:14px; max-width:32ch;">Part of the Outbound Suite by HeadFirst Services.</p>
+      </div>
+      <div>
+        <h4>Help</h4>
+        <ul>
+          <li><a href="/zonelink/">Overview</a></li>
+          <li><a href="/zonelink/faq/">FAQ</a></li>
+          <li><a href="/zonelink/support/">Support</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="/zonelink/privacy/">Privacy Policy</a></li>
+          <li><a href="/zonelink/terms/">Terms of Service</a></li>
+          <li><a href="/zonelink/delete-account/">Delete Account</a></li>
+          <li><a href="/zonelink/delete-data/">Delete Data</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:support@headfirstservices.com">support@headfirstservices.com</a></li>
+          <li><a href="/">HeadFirst Services</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 HeadFirst Services. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
