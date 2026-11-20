@@ -10,10 +10,35 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@v4
+      # Actions pinned to commit SHAs (tag in the comment) so a moved tag
+      # can't change what runs with the Cloudflare token.
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+
+      # Publish only the website. tools/, README.md, wrangler.jsonc and
+      # repo dotfiles stay out (Pages ignores .assetsignore). .well-known/,
+      # _headers and _redirects are kept.
+      - name: Build publish folder
+        run: |
+          mkdir dist
+          rsync -a \
+            --exclude='/dist' \
+            --exclude='/.git' \
+            --exclude='/.github' \
+            --exclude='/.gitignore' \
+            --exclude='/.assetsignore' \
+            --exclude='/.wrangler' \
+            --exclude='/_to_delete' \
+            --exclude='/tools' \
+            --exclude='/README.md' \
+            --exclude='/wrangler.jsonc' \
+            ./ dist/
+          test -f dist/index.html && test -f dist/_headers && test -f dist/.well-known/security.txt
+          test ! -e dist/tools && test ! -e dist/README.md && test ! -e dist/wrangler.jsonc
+          echo "Publishing $(find dist -type f | wc -l) files"
+
       - name: Deploy to Cloudflare Pages
-        uses: cloudflare/wrangler-action@v3
+        uses: cloudflare/wrangler-action@9acf94ace14e7dc412b076f2c5c20b8ce93c79cd # v3.15.0
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy . --project-name=headfirstservices --commit-dirty=true
+          command: pages deploy dist --project-name=headfirstservices --commit-dirty=true

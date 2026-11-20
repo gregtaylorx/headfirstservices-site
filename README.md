@@ -49,7 +49,7 @@ Either way: no build tooling, no npm install — it's just static files.
 
 ## Current deploy status (as of Jul 2026)
 
-- Deployed via direct upload (`npx wrangler pages deploy . --project-name=headfirstservices --commit-dirty=true`), not git-connected. Re-run this command after every content change.
+- Deploys run from GitHub Actions on every push to `master` (`.github/workflows/deploy.yml`). The workflow copies only the website into `dist/` (no `tools/`, README, wrangler.jsonc or repo dotfiles; `.well-known/`, `_headers`, `_redirects` included) and runs `wrangler pages deploy dist`. **Never run `wrangler pages deploy .` from the repo root**: Pages ignores `.assetsignore`, so that publishes `tools/` and this README. Security headers (CSP, HSTS, frame/nosniff/referrer) live in `_headers`; pages must not use inline `<script>` (put JS in `/assets/js/` or next to the page) or the CSP blocks it.
 - Custom domain `headfirstservices.com` is bound directly to this Pages project (Custom Domains tab). It serves `/`, `/visastay/*`, `/packlite/*`, and `/assets/*` natively.
 - The old `hfs-assets` Worker (a stale pre-existing VisaStay marketing page) previously held the `headfirstservices.com` domain and has been detached.
 - A temporary reverse-proxy Worker (`hfs-visastay-proxy`, repo: `nomad-suite/visastay-proxy`) was used before the Pages project owned the root domain, to serve `/visastay/*` etc. alongside the old Worker. It's now retired/deleted — no longer needed since Pages owns the whole domain.
@@ -58,7 +58,7 @@ Either way: no build tooling, no npm install — it's just static files.
 
 - Submit `https://headfirstservices.com/sitemap.xml` in Google Search Console + Bing Webmaster Tools
 - When TripGear publishes, convert `/tripgear/index.html` from teaser to full product page (mirror `/zonelink/` layout), add store badges + screenshots
-- Deploy: pushing to `master` triggers `.github/workflows/deploy.yml` (wrangler pages deploy). Direct `wrangler pages deploy` still works for one-offs
+- Deploy: push to `master` (see "Current deploy status" above for what gets published).
 - Legal pages (privacy/terms/delete-account) are still physically hosted on the `gregtaylorx.github.io` repo, served via the `privacy.headfirstservices.com` CNAME (already live, same content, confirmed Jul 2026). All on-site links across this Pages project now point to `https://privacy.headfirstservices.com/...` instead of the raw `gregtaylorx.github.io` domain (looks more professional). **Google Play / App Store listings still reference the raw `gregtaylorx.github.io` URLs directly** (per VisaStay CLAUDE.md) — that's a separate store-console change, not done here. Don't repoint the underlying GitHub Pages repo or drop the `gregtaylorx.github.io` host without updating both store listings first.
 
 ## Analytics (as of Jul 2026)
