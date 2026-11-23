@@ -147,7 +147,7 @@ def privacy_account_app(a):
 
 <h2>1. Information We Collect</h2>
 {ACCOUNT_BLOCK.format(name=a['name'])}
-{a['privacy_collect']}
+{a['privacy_collect']}{a.get('privacy_age_signal', '')}
 {BIOMETRIC_BLOCK if a.get('biometric') else ''}
 {NO_TRACKING_BLOCK}
 {PAYMENT_BLOCK}
@@ -290,10 +290,16 @@ STORE = {
                  "https://apps.apple.com/us/app/chewpaca/id6799393365"),
 }
 
+# Store age-signal paragraphs (from each app's NonCode/PRIVACY_AGE_SIGNAL_DRAFT.md, 2026-11-23)
+AGE_VS = "\n<p><strong>Age range from your app store.</strong> Where the law requires it, VisaStay asks Google Play or the App Store, at most once a year, for the age range of the person using the device (under 13, 13 to 15, 16 to 17, or 18 and over). The store decides whether to share it, and you or a parent can decline. VisaStay keeps only that age range, and whether a parent has approved the app on a family account, on this device, and uses them only to provide an age-appropriate experience. They are never sent to us or anyone else and are never used for advertising, analytics or profiling. On Android they are not included in backups; on iPhone they are part of the app's normal device data and can be included in your device backup. For users under 13, the app works the same and collects the same information; the only change is a one-time notice. If a parent approved VisaStay through the family's store account, it says what we keep and why and how a parent can ask us to see or delete it. If not, it asks the child to get a parent's approval in Google Family Link or Apple Screen Time.</p>"
+AGE_ZL = '\n<p><strong>Age range from your app store.</strong> Where the law requires it, ZoneLink asks Google Play or the App Store, at most once a year, for the age range of the person using the device (for example "under 13," "13 to 15" or "18 and over"), and whether a parent or guardian manages the account. The store decides whether to share it, and you or your child\'s parent can decline. ZoneLink keeps only that age range and the parent-managed yes/no, in the app\'s settings on this device. It is never sent to us or anyone else, and we don\'t use it for ads or profiling (ZoneLink has no ads). Because it\'s stored with the app\'s other settings, it can be included in your phone\'s own Android or iCloud backup, which stays in your Google or Apple account. If the store reports that the user is under 13, ZoneLink works exactly the same: nothing is blocked or hidden, and you can still create an account. Purchases are approved by a parent through the store\'s own family controls (Google Family Link or Apple\'s Ask to Buy), not by ZoneLink.</p>'
+AGE_TG = '\n<p><strong>Age range from your app store.</strong> Where the law requires it, TripGear asks Google Play or the App Store for the age range of the person using the device (for example "under 13", "13–15", "16–17" or "18 and over"). It asks at most once a year; if the store can\'t answer, it tries again the next time you open the app. The store decides whether to share the age range, and you or a parent can decline. TripGear keeps only that age range and the date it asked, in the device\'s secure storage (Android Keystore, iOS Keychain), and uses it only to adjust the app. It is never sent to us, to our service providers, or to TripGear\'s AI features. On Android it is excluded from device backups. On iPhone it is kept in the Keychain, which is included, encrypted, in iCloud and encrypted computer backups. If the store says the user is under 13, nothing is blocked and your lists, weather, debriefs and insights work as usual, but these features are turned off: AI packing suggestions and insights, Share TripGear (your personal invite link and QR code), Send feedback (a link to our support page appears instead), and shared lists (sharing a list, joining one from a link, and accepting email invitations).</p>'
+
 APPS = []
 
 # ---------------- VisaStay ----------------
 APPS.append(dict(
+    privacy_updated="November 23, 2026", privacy_age_signal=AGE_VS,
     slug="visastay", name="VisaStay", tagline_lc="a visa day and tax residency tracker for frequent travelers",
     suite="Part of the Outbound Suite by HeadFirst Services.", released=True,
     support_email="support@headfirstservices.com", biometric=True, own_faq=True,
@@ -368,6 +374,7 @@ consequences of relying on information in the app.</p>""",
 
 # ---------------- ZoneLink ----------------
 APPS.append(dict(
+    privacy_updated="November 23, 2026", privacy_age_signal=AGE_ZL,
     slug="zonelink", name="ZoneLink", tagline_lc="a visual, sleep-aware time-zone planner",
     suite="Part of the Outbound Suite by HeadFirst Services.", released=True,
     support_email="support@headfirstservices.com", biometric=True,
@@ -423,6 +430,7 @@ not liable for missed or mistimed meetings.</p>""",
 
 # ---------------- TripGear ----------------
 APPS.append(dict(
+    privacy_updated="November 23, 2026", privacy_age_signal=AGE_TG,
     slug="tripgear", name="TripGear", tagline_lc="weather-aware packing lists that learn from every trip",
     suite="Part of the Outbound Suite by HeadFirst Services. Coming to the App Store and Google Play.", released=False,
     support_email="support@headfirstservices.com", biometric=False,
