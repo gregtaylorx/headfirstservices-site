@@ -112,9 +112,7 @@ the UK, this is a transfer of personal data outside your region, covered by Stan
 incorporated into our agreements with our processors.</p>
 
 <h2>10. Children's Privacy</h2>
-<p>{a['name']} is not directed to children under 13 (or 16 in the EEA). We do not knowingly collect personal data from
-children. If you believe a child has given us personal data, contact <a href="mailto:{PRIVACY_EMAIL}">{PRIVACY_EMAIL}</a>
-and we will delete it promptly.</p>
+{children_block(a)}
 
 <h2>11. Security</h2>
 <p>We use industry-standard security measures, including encryption in transit (TLS 1.2+) and at rest, row-level
@@ -294,6 +292,37 @@ STORE = {
 AGE_VS = "\n<p><strong>Age range from your app store.</strong> Where the law requires it, VisaStay asks Google Play or the App Store, at most once a year, for the age range of the person using the device (under 13, 13 to 15, 16 to 17, or 18 and over). The store decides whether to share it, and you or a parent can decline. VisaStay keeps only that age range, and whether a parent has approved the app on a family account, on this device, and uses them only to provide an age-appropriate experience. They are never sent to us or anyone else and are never used for advertising, analytics or profiling. On Android they are not included in backups; on iPhone they are part of the app's normal device data and can be included in your device backup. For users under 13, the app works the same and collects the same information; the only change is a one-time notice. If a parent approved VisaStay through the family's store account, it says what we keep and why and how a parent can ask us to see or delete it. If not, it asks the child to get a parent's approval in Google Family Link or Apple Screen Time.</p>"
 AGE_ZL = '\n<p><strong>Age range from your app store.</strong> Where the law requires it, ZoneLink asks Google Play or the App Store, at most once a year, for the age range of the person using the device (for example "under 13," "13 to 15" or "18 and over"), and whether a parent or guardian manages the account. The store decides whether to share it, and you or your child\'s parent can decline. ZoneLink keeps only that age range and the parent-managed yes/no, in the app\'s settings on this device. It is never sent to us or anyone else, and we don\'t use it for ads or profiling (ZoneLink has no ads). Because it\'s stored with the app\'s other settings, it can be included in your phone\'s own Android or iCloud backup, which stays in your Google or Apple account. If the store reports that the user is under 13, ZoneLink works exactly the same: nothing is blocked or hidden, and you can still create an account. Purchases are approved by a parent through the store\'s own family controls (Google Family Link or Apple\'s Ask to Buy), not by ZoneLink.</p>'
 AGE_TG = '\n<p><strong>Age range from your app store.</strong> Where the law requires it, TripGear asks Google Play or the App Store for the age range of the person using the device (for example "under 13", "13–15", "16–17" or "18 and over"). It asks at most once a year; if the store can\'t answer, it tries again the next time you open the app. The store decides whether to share the age range, and you or a parent can decline. TripGear keeps only that age range and the date it asked, in the device\'s secure storage (Android Keystore, iOS Keychain), and uses it only to adjust the app. It is never sent to us, to our service providers, or to TripGear\'s AI features. On Android it is excluded from device backups. On iPhone it is kept in the Keychain, which is included, encrypted, in iCloud and encrypted computer backups. If the store says the user is under 13, nothing is blocked and your lists, weather, debriefs and insights work as usual, but these features are turned off: AI packing suggestions and insights, Share TripGear (your personal invite link and QR code), Send feedback (a link to our support page appears instead), and shared lists (sharing a list, joining one from a link, and accepting email invitations).</p>'
+
+# Section 10 for apps that read the store age signal: says plainly what happens for under-13 users
+# instead of "we do not knowingly collect" (2026-11-23).
+UNDER13 = {
+    "visastay": ("VisaStay does not block the app or change what it collects. It shows a one-time notice asking the "
+                 "child to get a parent or guardian's approval in Google Family Link or Apple Screen Time."),
+    "zonelink": ("ZoneLink works the same and does not block sign-up. Purchases are approved by a parent through the "
+                 "store's own family controls (Google Family Link or Apple's Ask to Buy), not by ZoneLink."),
+    "tripgear": ("TripGear does not block the app, but it turns off the features that send information outside "
+                 "TripGear's own service: AI packing suggestions and insights, Share TripGear, Send feedback, and "
+                 "shared lists."),
+}
+
+
+def children_block(a):
+    mail = f'<a href="mailto:{PRIVACY_EMAIL}">{PRIVACY_EMAIL}</a>'
+    n, s = a['name'], a['slug']
+    if s not in UNDER13:
+        return (f"<p>{n} is not directed to children under 13 (or 16 in the EEA). We do not knowingly collect personal data from\n"
+                f"children. If you believe a child has given us personal data, contact {mail}\n"
+                f"and we will delete it promptly.</p>")
+    return (f"<p>{n} is a general-audience app. It is not directed to children under 13 (or under 16 in the EEA). "
+            f"Where the law requires it, {n} asks your app "
+            f"store for the user's age range (see section 1).</p>\n"
+            f"<p>If the store says the user is under 13, {UNDER13[s]} Because sign-up is not blocked, we may hold "
+            f"the account information described in section 1 for a child under 13 who uses {n}.</p>\n"
+            f"<p>If you are a parent or guardian, you can ask us at any time to tell you what we hold about your "
+            f"child, to correct it, or to delete it. Email {mail} and we will reply and act promptly. You can also "
+            f"delete the account and all its data yourself: see <a href=\"/{s}/delete-account/\">Delete your "
+            f"{n} account</a>.</p>")
+
 
 APPS = []
 
