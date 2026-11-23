@@ -530,6 +530,7 @@ APPS.append(dict(
     slug="chewpaca", name="ChewPaca", tagline_lc="an app that helps children learn to chew with their mouths closed",
     suite="An app for families by HeadFirst Services.", released=True, no_account=True,
     support_email="ChewPaca@HeadFirstServices.com",
+    privacy_updated="November 23, 2026",
 ))
 
 # ChewPaca pages are written out in full below (no account, no server).
@@ -568,6 +569,12 @@ settings; the app will then stop being able to run a practice session.</p>
   <tr><td>Your settings and, if you set one, a parent PIN</td><td>To remember your preferences</td></tr>
 </table></div>
 <p>We never receive any of it. Deleting the app deletes it from your phone.</p>
+<p><strong>Age range from your app store.</strong> Where the law requires it, ChewPaca asks Google Play or the App
+Store, at most once a year, for the age range of the person using the device (for example "under 13" or "18 and
+over"). The store decides whether to share it, and you or your child's parent can decline. ChewPaca keeps only that age
+range, on this device, and uses it only to tailor the app — for example, to say that the store will ask a parent to
+approve a purchase. It is never sent to us or anyone else, and it is not included in backups. The child age you choose
+during setup is a practice setting for your child, not a check of your age.</p>
 
 <h2>Phone backups</h2>
 <p>We want to be precise here, because it would be easy to overclaim.</p>
@@ -1016,13 +1023,14 @@ def build():
     for a in APPS:
         s, n = a['slug'], a['name']
         upd = f'<p class="legal-updated">Last updated: {UPDATED}</p>'
+        pupd = f'<p class="legal-updated">Last updated: {a.get("privacy_updated", UPDATED)}</p>'
         # Privacy
         if a.get('no_account'):
             pbody = CHEWPACA_PRIVACY
         else:
             pbody = privacy_account_app(a)
         written.append(write(f"{s}/privacy/index.html", page(a, "privacy", f"{n} Privacy Policy", "Privacy",
-                       f"{n} Privacy Policy", None, upd + pbody, f"How {n} handles your information.")))
+                       f"{n} Privacy Policy", None, pupd + pbody, f"How {n} handles your information.")))
         # Terms
         if a.get('no_account'):
             tbody = CHEWPACA_TERMS_HEAD + shared_terms_tail(dict(a, terms_termination="You may stop using ChewPaca at any time by uninstalling it, which erases all of its data from your phone."), survive="7, 9, 10, 11, and 12")
