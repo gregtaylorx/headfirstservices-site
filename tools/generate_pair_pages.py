@@ -87,6 +87,8 @@ def page(pp, dc):
     schengen = d.get("sz") and pp not in gp.FREE_MOVEMENT
     extras = [t for t in [r.get("n")] + [c for c in (r.get("cond") or []) if isinstance(c, str)]
               if t and not INTERNAL.search(t)]
+    if r.get("v") is False:
+        extras.append("Unable to confirm with an official source yet, check before you travel.")
     url = f"https://headfirstservices.com/visastay/passports/{pp.lower()}/{dc.lower()}/"
     q1 = f"Do {meta['demonym']} need a visa for {country}?"
     faqs = [(q1, ans)]
